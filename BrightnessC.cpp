@@ -1,4 +1,4 @@
-﻿#pragma comment(lib, "Dxva2.lib")
+#pragma comment(lib, "Dxva2.lib")
 #pragma comment(lib , "User32.lib")
 #include <iostream>
 #include <Windows.h>
@@ -38,26 +38,32 @@ void brightnessset(bool* exit)
 
 	GetMonitorBrightness(PhysicalMonitor[0].hPhysicalMonitor, &MinBrightness, &CurrentBrightness, &MaxBrightness);
 	// brightness check
-	if (!SetMonitorBrightness(PhysicalMonitor[0].hPhysicalMonitor, Bright)) {
-		if (Bright < 0) {
-			cout << "\nur " << Bright << " invalid , min is "<<MinBrightness<<"\n";
-			Bright = MinBrightness+1;
-		}
-		if (Bright > MaxBrightness) {
-			cout << "\nur " << Bright << " invalid , max is "<<MaxBrightness<<"\n";
-			Bright = MaxBrightness-1;
-		}
-		if (Bright == MaxBrightness) {
-			Bright = MaxBrightness-1;
-		}
-		if (Bright == 0) {
-			Bright = MinBrightness;
-		}
-		for (int i = 0; i < size_t(PhysicalMonitor);i++)
+	if (Bright < 0) {
+		cout << "\nur " << Bright << " invalid , min is " << MinBrightness << "\n";
+		Bright = MinBrightness + 1;
+	}
+	if (Bright > MaxBrightness) {
+		cout << "\nur " << Bright << " invalid , max is " << MaxBrightness << "\n";
+		Bright = MaxBrightness - 1;
+	}
+	if (Bright == MaxBrightness) {
+		Bright = MaxBrightness - 1;
+	}
+	if (Bright == 0) {
+		Bright = MinBrightness;
+	}
+	for (int i = 0; i < size_t(PhysicalMonitor);i++)
+	{
+		if (!SetMonitorBrightness(PhysicalMonitor[i].hPhysicalMonitor, Bright))
 		{
 			SetMonitorBrightness(PhysicalMonitor[i].hPhysicalMonitor, Bright);
 		}
+		else
+		{
+			SetMonitorBrightness(PhysicalMonitor[i].hPhysicalMonitor, Bright);;
+		}
 	}
+	
 	delete[] PhysicalMonitor;
 }
 
