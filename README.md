@@ -8,7 +8,8 @@ function in the future :
 1. Timer
 2. gui
 3. temperature changer
-4. rework from highlevelmonitorconfigurationapi to lowlevelmonitorconfigurationapi
+4. Laptop support
+5. rework from highlevelmonitorconfigurationapi to lowlevelmonitorconfigurationapi
 
 From microsoft wiki :   
  **The physical monitor configuration functions operate using the VESA Control Command Set (MCCS) standard over the I2C interface. 
